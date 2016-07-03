@@ -43,13 +43,10 @@
 			 </div>
         	</div>
 
-        	<div class="row tshirt-list">
-        		<div class="row list-header"> 
+        	<div class="row shirt-list">
+        		<div class="list-header"> 
         			<h4 class="lead">看看别人的设计有多跩</h4>
         		</div>
-
-        		<div class="container shirt-list">
-        	   </div>
         </div>
 
 <!-- Cloth picker popup -->
@@ -124,8 +121,8 @@
                         var likes = tshirt.likes;
                         var name = tshirt.name;
 
-                        $("div.shirt-list").append("\
-                            <div class='one-shirt col-md-2 col-xs-5'>\
+                        $(".shirt-list").append("\
+                            <div class='one-shirt col-md-3 col-xs-6'>\
                                 <div class=\"img\" style='background-image: url(" + imageURL + ")'></div>\
                                 <div class='tshirt-title' style='margin-top:10px'>\
                                     <span>" + name + "</span>\
@@ -138,16 +135,6 @@
                                     <img src='img/like.png'>\
                                 </button>\
                             </div>");
-
-                        if(i%5 == 0){
-                            $("div.one-shirt").addClass("col-ms-offset-1");
-                        }
-                        if(i%2 == 0){
-                            $("div.one-shirt").addClass("col-xs-offset-1");
-                        }
-                        if(i%5==0 && i%2!=0){
-                            $("div.one-shirt").addClass("col-md-offset-0");
-                        }
                     }
             });
         })();
@@ -159,11 +146,9 @@
                 console.log(id);
                 var liketshirtAPI = "http://api.wedfairy.com/api/superdry/artwork/" + id + "/like/";
                 var jqxhr = $.post( liketshirtAPI, function() {
-                    console.log("post successsfully");
                 })
                 .done(function() {
                     alert("投票成功");
-                    console.log("post successsfully");
                 });
             });
         </script>

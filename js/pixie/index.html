@@ -8,6 +8,40 @@
         <style type="text/css">[ng-cloak]#splash{display:block!important}[ng-cloak]{display:none}#splash{display:none;position:absolute;top:45%;left:50%;width:6em;height:6em;overflow:hidden;border-radius:100%;z-index:0}@-webkit-keyframes fade{from{opacity:1}to{opacity:.2}}@keyframes fade{from{opacity:1}to{opacity:.2}}@-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(360deg)}}@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}#splash::after,#splash::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%}#splash::before{background:linear-gradient(to right,green,#ff0);-webkit-animation:rotate 2.5s linear infinite;animation:rotate 2.5s linear infinite}#splash::after{background:linear-gradient(to bottom,red,#00f);-webkit-animation:fade 2s infinite alternate,rotate 2.5s linear reverse infinite;animation:fade 2s infinite alternate,rotate 2.5s linear reverse infinite}#splash-spinner{position:absolute;width:100%;height:100%;z-index:1;border-radius:100%;box-sizing:border-box;border-left:.5em solid transparent;border-right:.5em solid transparent;border-bottom:.5em solid rgba(255,255,255,.3);border-top:.5em solid rgba(255,255,255,.3);-webkit-animation:rotate .8s linear infinite;animation:rotate .8s linear infinite}</style>
         <link rel="stylesheet" href="assets/css/main.css?v17">
         <link href='http://fonts.useso.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+        <script type="text/javascript">
+            function touchHandler(event) {
+                var touches = event.changedTouches,
+                    first = touches[0],
+                    type = "";
+                switch(event.type)
+                {
+                    case "touchstart": type = "mousedown"; break;
+                    case "touchmove":  type = "mousemove"; break;        
+                    case "touchend":   type = "mouseup";   break;
+                    default:           return;
+                }
+
+                // initMouseEvent(type, canBubble, cancelable, view, clickCount, 
+                //                screenX, screenY, clientX, clientY, ctrlKey, 
+                //                altKey, shiftKey, metaKey, button, relatedTarget);
+
+                var simulatedEvent = document.createEvent("MouseEvent");
+                simulatedEvent.initMouseEvent(type, true, true, window, 1, 
+                                              first.screenX, first.screenY, 
+                                              first.clientX, first.clientY, false, 
+                                              false, false, false, 0/*left*/, null);
+
+                first.target.dispatchEvent(simulatedEvent);
+                // event.preventDefault();
+            }
+
+            (function init() {
+                document.addEventListener("touchstart", touchHandler, false);
+                document.addEventListener("touchmove", touchHandler, false);
+                document.addEventListener("touchend", touchHandler, false);
+                document.addEventListener("touchcancel", touchHandler, false);
+            })()
+        </script>
 
     </head>
 
@@ -320,7 +354,7 @@
                 <md-dialog class="upload-file-dialog save-dialog">
                     <md-input-container>
                         <label>用户名</label>
-                        <input type="text" ng-model="imageName">
+                        <input type="text" ng-model="userName">
                     </md-input-container>
                     <md-input-container>
                         <label>手机号码</label>
@@ -377,8 +411,8 @@
             <script type="application/ng-template" id="save-image-dialog">
                 <md-dialog class="upload-file-dialog save-dialog">
                     <md-input-container>
-                        <label>图片名</label>
-                        <input type="text" ng-model="imageName">
+                        <label>用户名</label>
+                        <input type="text" ng-model="userName">
                     </md-input-container>
                     <md-input-container>
                         <label>手机号码</label>
@@ -471,8 +505,21 @@
 
 
         <script type="text/javascript">
-            function createPost(url, mobile) {
-                // post url + mobile to API
+            function createPost(url, userName, mobile) {
+                console.log("createPost run");
+                // post url + mobile + userName to API
+                var uploadShirtAPI = "http://api.wedfairy.com/api/superdry/artwork/";
+                if(userName == ""){
+                    userName = "Superdry User";
+                }
+
+                var jqxhr = $.post( uploadShirtAPI,  { image: url, mobile: mobile, name: userName }, function() {
+                    console.log("post successsfully");
+                })
+                .done(function(response) {
+                    console.log("post successsfully, id is " + response.id);
+                    window.location.href = "../../sharing_page.html?tshirt_id=" + response.id;
+                });
             }
             document.addEventListener('DOMContentLoaded', function() {
                 var myPixie = Pixie.setOptions({
@@ -500,24 +547,33 @@
                     var imageURL = "assets/images/tshirts/tshirt-" + picId + ".png"
 
                     sdpE.openSampleImage(imageURL);
-                    window.uploadImage = function(data) {
+                    window.uploadImage = function(data, userName, mobileNum) {
                     // var data = sdpO.getDataUrl('png', '8');
                     //  ajax
+                    console.log ("userName = "+ userName + ", mobileNum = " + mobileNum);
                     var pic = data.substr(22);
                     var url = "http://up.qiniu.com/putb64/-1";
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange=function(){
-                        // xyz = xhr.responseText
-                        var data = JSON.parse(xhr.responseText);
-                        console.log(data.key);
-                        var url = 'http://up.img.heidian.co/' + data.key;
-                        console.log(url);
-                        createPost(url, '18000000000')
+                        if (xhr.readyState === 4) {
+                            if (xhr.status >= 200 && xhr.status < 400) {
+                                console.log("onreadystatechange run");
+                                // xyz = xhr.responseText
+                                var data = JSON.parse(xhr.responseText);
+                                console.log(data.key);
+                                var url = 'http://up.img.heidian.co/' + data.key;
+                                console.log(url);
+                                createPost(url, userName, mobileNum);
+                            } else {
+                                // Handle error case
+                            }
+                        }
                     }
                     xhr.open("POST", url, true);
                     xhr.setRequestHeader("Content-Type", "application/octet-stream");
                     xhr.setRequestHeader("Authorization", "UpToken " + QINIU_UPTOKEN);
                     xhr.send(pic);
+                    console.log("sendpic");
                 };
                 } else {
                     // 参数错误

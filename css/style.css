@@ -73,21 +73,26 @@ div.start-box a{
 
 /* T-shirt list */
 
-div.tshirt-list{
+div.shirt-list{
 	background-color: #cccccc;
 	/*background-color: rgba(204, 204, 204, 0.8);*/
 	text-align: center;
+	padding-left: 20px;
+	padding-right:20px;
+
 }
 
-div.tshirt-list div.list-header{
-	margin-top: 30px;
-	margin-bottom: 20px;
+.list-header{
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 div.one-shirt{
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 div.one-shirt small{
@@ -290,10 +295,12 @@ button.share-btn{
 
 @media screen and (min-width: 992px){
 
-	img.tshirt-img{
-		margin-top: 50px;
-		max-width:40%;
-		margin-bottom: 50px;
+	.tshirt-img{
+		padding-top: 100%;
+		width: 72%;
+		background-position: center;
+		background-repeat: no-repeat;
+		margin: auto;
 	}
 
 	button#like-it{
@@ -309,11 +316,6 @@ button.share-btn{
 }
 
 @media screen and (max-width: 991px){
-	img.tshirt-img{
-		max-width:100%;
-		margin-top: 50px;
-	}
-
 	button#like-it{
 		margin-bottom: 10px;
 		margin-top: 50px;
@@ -324,6 +326,19 @@ button.share-btn{
 
 	button#like-it img{
 		max-width: 100%;
+	}
+
+	.tshirt-container{
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 10%;
+	}
+	.tshirt-img{
+		background-size: cover;
+		padding-top: 120%;
+		width: 90%;
+		background-position: center;
+		margin: auto;
 	}
 }
 @media(max-width: 768px){
@@ -341,6 +356,24 @@ button.share-btn{
 	button.btn-start{
 		margin-top: 23px;
 	}
+
+	.tshirt-container{
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 10%;
+	}
+	.tshirt-img{
+		background-size: cover;
+		padding-top: 120%;
+		width: 90%;
+		background-position: center;
+		margin: auto;
+	}
+
+}
+.like-row span{
+	font-size: 30px;
+	color: #ffffff;
 }
 
 

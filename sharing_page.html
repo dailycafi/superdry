@@ -34,52 +34,46 @@
 
 
         <div class="centered-img row">
-            <img class="sketch2 hidden-sm hidden-xs" src="img/sketch2.png">
+          <!--  <img class="sketch2 hidden-sm hidden-xs" src="img/sketch2.png">-->
             <!--<img class="tshirt-img" src="img/tshirt-red.png"/>-->
-
-            <img class="sketch1 hidden-sm hidden-xs" src="img/sketch1.png">
+            <!--<img class="sketch1 hidden-sm hidden-xs" src="img/sketch1.png">-->
         </div>
 
         <div class="container" style="text-align:center">
             <div class="row button-row">
                 <!--<button id="wechat-share" class="share-btn" onclick="window.location.href='#popup1'">-->
                 <button id="wechat-share" class="share-btn my_popup_open" onclick="popOverlay()">
-                    <img src="img/wechat-icon.png">
+                    <img src="img/wechat.png">
                 </button>
                 <button id="weibo-share" class="share-btn" onclick="shareToWeibo()">
-                    <img src="img/weibo-icon.png">
+                    <img src="img/weibo.png">
                 </button>
                 <button id="view-all-button" class="share-btn" onclick="window.location.href='index.html'">
-                    <img src="img/view-all-icon.png">
+                    <img src="img/check.png">
                 </button>
             </div>
 
-            <div class="row">     
-                <img class="tshirt-img" src="img/tshirt-red.png"/>
+            <div class="tshirt-container">     
+                <div class="tshirt-img"> </div>
             </div>
 
-            <div class="row">
+            <div class="row like-row">
                 <button id="like-it" class="like-btn">
                     <img src="img/like-single.png">
                 </button>
             </div>
-            <div class="row">
-
-            </div>
         </div>
         </div>
-
-
-        <div id="my_popup" class="overlay ">
+        <div id="my_popup" class="overlay">
             <div class="popup container" style="text-align:center;">
-                <h2 style="margin-bottom:20px;margin-top:10px;">扫描二维码分享到朋友圈</h2>
+                <h2 style="margin-bottom:20px;margin-top:20px;">扫描二维码分享到朋友圈</h2>
                 <a class="close my_popup_close" href="#">&times;</a>
                 <div id="qrcode" style="margin:auto;text-align:center;""></div>
             </div>
         </div>
 
         <div id="wechat_popup" class="overlay ">
-            <img class="wechat-tip" src="guide-tip-wechat-share.png">
+            <img class="wechat-tip" src="img/guide-tip-wechat-share.png">
         </div>
 
 
@@ -139,6 +133,41 @@
             $( document ).ready(function() {
                 var url = window.location.href;     // Returns full URL
                 $('#qrcode').qrcode(url); //任意字符串 
+            });
+        </script>
+
+        <script>
+            var match = location.search.match(/tshirt_id=(\d+)/)
+            if (match) {
+                var tshirt_id = +match[1];
+                //http://api.wedfairy.com/api/superdry/artwork/1/
+                var tshitsListAPI = "http://api.wedfairy.com/api/superdry/artwork/" + tshirt_id + "/";
+                $.getJSON( tshitsListAPI, {
+                })
+                .done(function(data) {
+                    var imageURL = data.image;
+                    var likes = data.likes;
+                    window.tshirt_id = data.id;
+
+                    $(".tshirt-img").css("background-image",  'url('+imageURL+')');
+                    $(".like-row").append("\
+                        <span id='like-count'> 已点赞："+ likes + "</span>\
+                    ");
+
+                });
+            }
+        </script>
+        <script>
+            $('body').on('click', '.like-btn', function() {
+                var tshirt_id = window.tshirt_id;
+                var liketshirtAPI = "http://api.wedfairy.com/api/superdry/artwork/" + tshirt_id + "/like/";
+                var jqxhr = $.post( liketshirtAPI, function() {
+                    console.log("post successsfully");
+                })
+                .done(function() {
+                    alert("投票成功");
+                    console.log("post successsfully");
+                });
             });
         </script>
     </body>

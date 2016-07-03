@@ -28659,7 +28659,7 @@ var fabric = fabric || {
             return Math.round(100 * n.currentZoom)
         }
     }]), angular.module("ImageEditor").controller("TopPanelController", ["$rootScope", "$scope", "$mdDialog", "$mdToast", "$$rAF", "canvas", "history", "saver", function(t, e, n, i, r, o, a, s) {
-        e.history = a, e.isDemo = t.isDemo, e.canOpenImage = !1, e.canvas = o, e.openImageMode = "open", e.canvasWidth = 800, e.canvasHeight = 600, e.imageName = "image", e.imageType = "jpeg", e.imageQuality = 8, e.objectsPanelOpen = !0, e.historyPanelOpen = !1, e.openUploadDialog = function(t) {
+        e.history = a, e.isDemo = t.isDemo, e.canOpenImage = !1, e.canvas = o, e.openImageMode = "open", e.canvasWidth = 800, e.canvasHeight = 600, e.userName = "SuperDry", e.imageType = "png", e.imageQuality = 1, e.objectsPanelOpen = !0, e.historyPanelOpen = !1, e.openUploadDialog = function(t) {
             n.show({
                 template: $("#main-image-upload-dialog-template").html(),
                 targetEvent: t,
@@ -28697,7 +28697,7 @@ var fabric = fabric || {
         }, e.openSampleImage = function(url) {
             o.loadMainImage(url || "assets/images/lotus.jpg"), e.closeUploadDialog(), t.started = !0
         }, e.saveImage = function(t) {
-            s.saveImage(e.imageType, e.imageQuality, e.imageName, t)
+            s.saveImage(e.imageType, e.imageQuality, e.userName, e.mobileNum, t)
         }, e.showImagePreview = function(t) {
             fabric.util.loadImage(t, function(t) {
                 e.$apply(t ? function() {
@@ -29127,8 +29127,8 @@ var fabric = fabric || {
         return n
     }]), angular.module("ImageEditor").factory("saver", ["$rootScope", "$mdDialog", "$http", "$timeout", "canvas", function(t, e, n, i, r) {
         var o = {
-            saveImage: function(e, n, i, o) {
-                window.uploadImage(this.getDataUrl(n, i));
+            saveImage: function(e, n, i, m, o) {
+                window.uploadImage(this.getDataUrl("png", "1"), i, m);
                 // return r.fabric.deactivateAll(), t.isDemo ? this.handleDemoSiteSave(o) : t.isIntegrationMode ? this.handleIntegrationModeSave(e, n, i) : void this.saveToComputer(e, n, i)
             },
             handleIntegrationModeSave: function(n, i, o) {
