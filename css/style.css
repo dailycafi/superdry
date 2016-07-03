@@ -1,0 +1,346 @@
+body{
+	background-color: black !important;
+}
+
+@font-face {
+    font-family: msyh;
+    src: url(../fonts/msyh.ttf);
+}
+
+.container img.splitting-top{
+	position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: -1;
+    width: 30%;
+}
+
+.container img.splitting-bottom{
+	transform:rotate(180deg);
+
+    -ms-transform:rotate(180deg); 	/* IE 9 */
+    -moz-transform:rotate(180deg); 	/* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+    -o-transform:rotate(180deg); 	/* Opera */
+
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	z-index: -1;
+}
+
+div.logo{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+div.superdry-well{
+	background-image: url("../img/superdry_header.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	z-index: 999;
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+
+div.superdry-well div.text-container h1{
+	font-family:msyh, sans-serif;
+}
+
+div.superdry-well div.text-container{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	color: #fff;
+}
+
+div.superdry-well div.text-container p{
+	text-align: justify;
+}
+
+div.superdry-well div.start-box{
+	padding:8px;
+	margin-top: 10px;
+	margin-left: 0;
+	background-color: rgb(255, 91, 0);
+	height: 40px;
+	text-align: center;
+	color: #fff;
+}
+
+div.start-box a{
+	color: #fff;
+}
+
+/* T-shirt list */
+
+div.tshirt-list{
+	background-color: #cccccc;
+	/*background-color: rgba(204, 204, 204, 0.8);*/
+	text-align: center;
+}
+
+div.tshirt-list div.list-header{
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+div.one-shirt{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+div.one-shirt small{
+	color: #666666;
+}
+
+.img{
+	background-position: center;
+	background-size: cover;
+	padding-top: 150%;
+	width: 100%;
+}
+
+.btn-detail{
+	background-color: #f75c01;
+	color: white;
+	margin-top: 5px;
+}
+
+.btn-detail:hover{
+	color: white;
+}
+
+.btn-detail:active{
+	color: white;
+}
+
+.btn-detail:focus{
+	color: white;
+}
+
+button.btn-start{
+
+	background-color: #f75c01;
+	color: white;
+	margin-top: 5px;
+	height: 20%;
+
+}
+
+button.btn-start:hover{
+	color: white;
+}
+
+button.btn-like{
+	position: absolute;
+	top: 0;
+	right:0;
+	width: 30%;
+
+	background-color: transparent;
+	border-width: 0;
+	border-style: none;
+}
+
+button.btn-like:active{
+	border-width: 0;
+}
+
+button.btn-like:focuse{
+	border-width: 0;
+}
+
+button.btn-like img{
+	width: 100%;
+	height: 100%;
+}
+
+div.shirt-list{
+	padding-bottom: 40px;
+}
+
+/* pop up window */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  min-width: 50%;
+  opacity: 0;
+}
+
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin-top:20%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  max-width: 100%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+
+.popup h3{
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  text-align: center;
+}
+
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+/* Below is for sharing_page */
+
+.centered-img img.tshirt-img{
+    height: 60%;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.centered-img img.sketch2{
+    height: 20%;
+    position: absolute;
+    top: -50%;
+    bottom: 0;
+    left: -50%;
+    right: 0;
+    margin: auto;
+}
+
+.centered-img img.sketch1{
+    height: 20%;
+    position: absolute;
+    top: 0;
+    bottom: -40%;
+    left: 0;
+    right: -50%;
+    margin: auto;
+}
+
+img.wechat-tip{
+	position: absolute;
+	top:0;
+	right: 0;
+	width: 100%;
+}
+
+
+button.share-btn img{
+		width:80px;
+		height: 80px;
+}
+
+button.share-btn{
+		background-color: Transparent;
+		cursor:pointer;
+	    overflow: hidden;
+	    outline:none;
+	    border-width: 0;
+}
+
+
+.button-row{
+		bottom:0;
+		text-align: center;
+	}
+
+@media screen and (min-width: 992px){
+
+	img.tshirt-img{
+		margin-top: 50px;
+		max-width:40%;
+		margin-bottom: 50px;
+	}
+
+	button#like-it{
+		background-color: transparent;
+		border-width: 0;
+		max-width:8%;
+	}
+
+	button#like-it img{
+		max-width: 100%;
+	}
+
+}
+
+@media screen and (max-width: 991px){
+	img.tshirt-img{
+		max-width:100%;
+		margin-top: 50px;
+	}
+
+	button#like-it{
+		margin-bottom: 10px;
+		margin-top: 50px;
+		background-color: transparent;
+		border-width: 0;
+		width:100px;
+	}
+
+	button#like-it img{
+		max-width: 100%;
+	}
+}
+@media(max-width: 768px){
+	.popup h3{
+		font-size: 16px;
+	}
+	div.superdry-well h1, h2, h3{
+		text-align: center;
+		width: 100%;
+	}
+	div.superdry-well p{
+		margin-top: 30px;
+	}
+
+	button.btn-start{
+		margin-top: 23px;
+	}
+}
+
+

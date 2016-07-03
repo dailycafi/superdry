@@ -1,0 +1,174 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/lightbox.css">
+
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+        	<!-- Right top corner splash color -->
+        	<img src="img/splitting.png" class="splitting-top"/>
+        	<!--<img src="img/splitting.png" class="splitting-bottom .visible-md-block"/>-->
+        	
+            <!-- Left top corner logo-->
+        	<div class="row logo">
+        		<img src="img/logo.png" class="col-sm-2 col-xs-4 col-xs-offset-4 col-sm-offset-0"/>
+        	</div>
+
+        	<div class="row superdry-well">
+			 <div class="row text-container col-xs-offset-1 col-sm-5 col-xs-10">
+					<h1>挑战超级跩</h1>
+					<h2>T恤设计等你来！！！</h2>
+					<h3>#superZHUAI#</h3>
+					<p>耍酷、玩跩皆态度！Superdry邀请你发挥极致想象力动手设计超跩T恤。我们将送最佳T恤设计者去Superdry伦敦总部参观，享受超跩之旅！截止日期7月10日，现在就来挑战！</p>
+                <button type="button" class="btn btn-start col-xs-12 col-md-4" onclick="window.location.href='#popup1'">开始设计</button>
+			 </div>
+        	</div>
+
+        	<div class="row tshirt-list">
+        		<div class="row list-header"> 
+        			<h4 class="lead">看看别人的设计有多跩</h4>
+        		</div>
+
+        		<div class="container shirt-list">
+        	   </div>
+        </div>
+
+<!-- Cloth picker popup -->
+        <div id="popup1" class="overlay ">
+			<div class="popup container">
+                <div class="row">
+    				<h3>选择T恤样式开始设计</h3>
+    				<a class="close" href="#">&times;</a>
+                </div>
+                <div class="row">
+    				<div class="col-sm-2 col-sm-offset-1 col-xs-5 col-xs-offset-1">
+    					<a href="js/pixie/index.html?pic_id=0">
+    	        			<div class="img" style="background-image: url('img/tshirt/tshirt-black.png')"/></div>
+            			</a>
+    				</div>
+    				<div class="col-sm-2 col-xs-5">
+    					<a href="js/pixie/index.html?pic_id=1">
+                            <div class="img" style="background-image:url('img/tshirt/tshirt-blue.png')"/></div>
+            			</a>
+    				</div>
+    				<div class="col-sm-2 col-xs-5 col-xs-offset-1 col-sm-offset-0">
+    					<a href="js/pixie/index.html?pic_id=2">
+                            <div class="img" style="background-image: url('img/tshirt/tshirt-darkblue.png')"/></div>
+            			</a>
+    				</div>
+    				<div class="col-sm-2 col-xs-5">
+    					<a href="js/pixie/index.html?pic_id=3">
+                            <div class="img" style="background-image:url('img/tshirt/tshirt-red.png')"/></div>
+            			</a>
+    				</div>
+    				<div class="col-sm-2 col-xs-5 col-xs-offset-1 col-sm-offset-0">
+    					<a href="js/pixie/index.html?pic_id=4">
+                            <div class="img" style="background-image: url('img/tshirt/tshirt-white.png')"/></div>
+            			</a>
+    				</div>
+                </div>
+			</div>
+		</div>
+
+<!-- Cloth picker popup end -->
+
+        <script src="http://libs.useso.com/js/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+
+        <script>
+            (function() {
+                var tshitsListAPI = "http://api.wedfairy.com/api/superdry/artwork/?page_size=50";
+                $.getJSON( tshitsListAPI, {
+                })
+                .done(function(data) {
+                    var count = data.count;
+                    var results = data.results;
+
+                    console.log(results);
+                    for (i = 0; i < count; i++){
+                        //Generate div and append to <div class="container shirt-list">
+                        var tshirt = results[i];
+                        var id = tshirt.id;
+                        var imageURL = tshirt.image;
+                        var likes = tshirt.likes;
+                        var name = tshirt.name;
+
+                        $("div.shirt-list").append("\
+                            <div class='one-shirt col-md-2 col-xs-5'>\
+                                <div class=\"img\" style='background-image: url(" + imageURL + ")'></div>\
+                                <div class='tshirt-title' style='margin-top:10px'>\
+                                    <span>" + name + "</span>\
+                                </div>\
+                                <div class='tshirt-author' style='margin-bottom:10px'>\
+                                    <small>" + likes +"票</small>\
+                                </div>\
+                                <a type='button' class='btn btn-detail' href='" + imageURL + "' data-lightbox='tshirts-images'>查看大图</a>\
+                                <button type='button' class='btn-like' data-index=\"" + id + "\">\
+                                    <img src='img/like.png'>\
+                                </button>\
+                            </div>");
+
+                        if(i%5 == 0){
+                            $("div.one-shirt").addClass("col-ms-offset-1");
+                        }
+                        if(i%2 == 0){
+                            $("div.one-shirt").addClass("col-xs-offset-1");
+                        }
+                        if(i%5==0 && i%2!=0){
+                            $("div.one-shirt").addClass("col-md-offset-0");
+                        }
+                    }
+            });
+        })();
+        </script>
+
+        <script>
+            $('body').on('click', '.btn-like', function() {
+                var id = $(this).attr("data-index");
+                console.log(id);
+                var liketshirtAPI = "http://api.wedfairy.com/api/superdry/artwork/" + id + "/like/";
+                var jqxhr = $.post( liketshirtAPI, function() {
+                    console.log("post successsfully");
+                })
+                .done(function() {
+                    alert("投票成功");
+                    console.log("post successsfully");
+                });
+            });
+        </script>
+
+        <script src="js/lightbox.js"></script>
+
+    </body>
+</html>
