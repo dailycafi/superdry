@@ -387,6 +387,7 @@
             <script data-preload="true" data-path="." src="pixie-integrate.js"></script>
             <script src="assets/js/scripts.js?v20"></script>
             <script src="assets/js/jquery.visible.min.js"></script>
+            <script src="assets/js/loading-overlay/src/loadingoverlay.min.js"></script>
 
             <script type="application/ng-template" id="gradient-sheet-template">
                 <md-bottom-sheet class="bottom-sheet gradients-sheet">
@@ -435,7 +436,7 @@
                         <label>手机号码</label>
                         <input type="text" ng-model="mobileNum">
                     </md-input-container>
-                    <md-button ng-click="saveImage($event)" class="md-raised md-primary">保存</md-button>
+                    <md-button ng-click="saveImage($event)" id="save-image-btn" class="md-raised md-primary">保存</md-button>
                 </md-dialog>
             </script>
 
@@ -512,13 +513,14 @@
 
         <script type="text/javascript">
             function createPost(url, userName, mobile) {
-                console.log("createPost run");
+                //save-image-btn
                 // post url + mobile + userName to API
+                //$.LoadingOverlay("show");
+
                 var uploadShirtAPI = "http://api.wedfairy.com/api/superdry/artwork/";
                 if(userName == ""){
                     userName = "Superdry User";
                 }
-
                 var jqxhr = $.post( uploadShirtAPI,  { image: url, mobile: mobile, name: userName }, function() {
                     console.log("post successsfully");
                 })
@@ -526,6 +528,7 @@
                     console.log("post successsfully, id is " + response.id);
                     window.location.href = "../../sharing_page.html?tshirt_id=" + response.id;
                 });
+                
             }
             document.addEventListener('DOMContentLoaded', function() {
                 var myPixie = Pixie.setOptions({
@@ -566,6 +569,7 @@
                                 console.log("onreadystatechange run");
                                 // xyz = xhr.responseText
                                 var data = JSON.parse(xhr.responseText);
+                                $.LoadingOverlay("show");
                                 console.log(data.key);
                                 var url = 'http://up.img.heidian.co/' + data.key;
                                 console.log(url);
@@ -599,7 +603,6 @@
                         flag=1;
                     });
                 }
-
              if ($(".toggle-float").visible()){
                     flag = 0;
                     $("#text-panel").hide( "fast", function() {
