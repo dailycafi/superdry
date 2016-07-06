@@ -115,7 +115,6 @@
                 <div id="tabs">
                     <section id="text" data-index="1" class="tab" ng-controller="TextController">
                         <h2 class="tab-title">选择字体</h2>
-
                         <div class="filter-inputs">
                             <div class="filter-input">
                                 <md-select ng-model="filters.category" ng-change="fonts.paginator.filter(filters)" placeholder="Select a Type">
@@ -140,9 +139,10 @@
                         </section>
 
                         <div data-name="text" id="text-panel" class="float-panel actions-menu wider md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
-                            <div class="menu-header"><h3>文字</h3></div>
+                            <div class="menu-header" id="text-panel-header"><h3><span>文字</span><span class="text-collapse" style="float:right">收起</span></h3></div>
 
                             <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                                <p style="text-align:center; margin-bottom:20px;">切换到其他工具前请先保存</p>
                                 <div class="md-slider">
                                     <div class="slider-label">透明度</div>
                                     <md-slider aria-label="text opacity" step="0.1" ng-model="opacity" ng-change="text.setProperty('opacity', opacity)" min="0" max="1"></md-slider>
@@ -216,18 +216,11 @@
                                 <img title="{{ brush }}" id="brush-img" class="img-responsive" ng-src="assets/images/brushes/{{brush}}.png"/>
                             </div>
                         </div>
-
-                        <!--
-                         <section id="right-panels">
-                            <section id="objects" class="md-whiteframe-z1" ng-controller="ObjectsPanelController">
-                                <h3 ed-toggle-panel-visibility="objects"><span>步骤</span><i class="mdi mdi-expand-less"></i></h3>
-                            </section>
-                        </section>
-                        -->
                         <div data-name="drawing" id="drawing-panel" class="float-panel actions-menu wider md-whiteframe-z1" ng-class="activePanel == 'drawing' ? 'open' : 'closed'">
-                            <div class="menu-header" id="drawing-panel-header"><h3><span>笔触</span></h3></div>
+                            <div class="menu-header" id="drawing-panel-header"><h3><span>笔触</span><span class="drawing-hide" style="float:right">收起</span></h3></div>
                             <!--ed-toggle-panel-visibility="objects" this needs to be togglable-->
                             <section class="actions-menu-inner" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                                <p style="text-align:center; margin-bottom:20px;">切换到其他工具前请先保存</p>
                                 <div class="md-slider">
                                     <div class="slider-label">笔触粗细</div>
                                     <md-slider aria-label="brush thickness" step="1" ng-model="drawing.params.brushWidth" ng-change="drawing.setProperty('width', drawing.params.brushWidth)" min="1" max="100"></md-slider>
@@ -285,7 +278,8 @@
 
                     <section id="stickers" class="tab" data-index="3" ng-controller="StickersController">
                         <div data-name="stickers" id="sticker-panel" class="actions-menu md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
-                            <div class="menu-header"><h3>贴纸</h3></div>
+                            <div class="menu-header"><h3><span>贴纸</span><span class="sticker-collapse" style="float:right">收起</span></h3></div>
+
                             <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
                                <div class="md-slider">
                                    <div class="slider-label">透明度</div>
@@ -301,7 +295,7 @@
                            </section>
                         </div>
                         <div ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light" ed-stickers-categories style="height: 100%">
-                            <section ng-repeat="category in categories" class="sticker-category-container">
+                            <section ng-repeat="category in categories" class="sticker-category-container" id="stickers-container">
                                 <div class="category-header" data-name="{{ category.name }}">{{ category.name }}</div>
                                 <div class="category-stickers" ng-class="{ 'open animated slideInDown': activeCategory === category.name, 'dark-bg': category.darkbg }">
                                     <div ng-repeat="doodle in category.items track by $index" ng-click="addToCanvas(category, $index+1, $event)" class="sticker">
@@ -320,7 +314,7 @@
 
                 <section id="top-panel" class="md-whiteframe-z1" ng-controller="TopPanelController">
                     <md-button ng-click="openSaveDialog($event)" class="md-primary md-raised">保存</md-button>
-                    <!--<span style="margin-right: 10px" id="toggle-float">显示/收起浮窗</span>-->
+                    <!--<span style="margin-right: 20px; color: #666;" class="toggle-float">显示/收起浮窗</span>-->
                 </section>
                 <canvas ng-show="started" id="canvas" class="md-whiteframe-z2"></canvas>
 
@@ -328,7 +322,7 @@
 
             <div id="bottom-bar" ng-controller="ZoomController">
                 <section class="zoom-container md-whiteframe-z1">
-                    <div class="current-zoom">{{ getCurrentZoom() }}%</div>
+                    <div class="current-zoom">{{ getCurrentZoom()}}%</div>
                     <div class="zoom-slider">
                         <md-slider aria-label="zoom" step="1" ng-model="zoom" ng-change="doZoom()"  min="{{ minScale }}" max="{{ maxScale }}"></md-slider>
                     </div>
@@ -596,7 +590,8 @@
         <script>
         //drawing-float && text-float
             var flag = 0;
-            $("#sidebar-toggler").click(function() {
+            $(".toggle-float").click(function() {
+                console.log("Enter here actually")
                 if ($("#drawing-panel").visible()) {
                     flag = 0;
                     $("#drawing-panel").hide( "fast", function() {
@@ -605,7 +600,7 @@
                     });
                 }
 
-             if ($("#text-panel").visible()){
+             if ($(".toggle-float").visible()){
                     flag = 0;
                     $("#text-panel").hide( "fast", function() {
                     // Animation complete.
@@ -613,7 +608,7 @@
                     });
                 }
 
-                if ($("#sticker-panel").visible()){
+                if ($(".toggle-float").visible()){
                     flag = 0;
                     $("#sticker-panel").hide( "fast", function() {
                     // Animation complete.
@@ -645,19 +640,59 @@
 
         <script type="text/javascript">          
             $("#brushes").click(function(){
-                console.log("brush clicked");
                 $("#drawing-panel").show( "fast", function() {
 
                 });
             });
             //text-fonts
             $("#text-fonts").click(function(){
-                console.log("brush clicked");
                 $("#text-panel").show( "fast", function() {
 
                 });
             });
+            $("#stickers-container").click(function(){
+                $("#sticker-panel").show( "fast", function() {
+
+                });
+            });
         </script>
+        <script type="text/javascript">
+            var hiddenPanel = 0;
+            $(".drawing-hide").click(function(){
+                hiddenPanel = 1;
+                $("#drawing-panel").hide( "fast", function() {
+                });
+            });
+            $(".text-collapse").click(function(){
+                hiddenPanel = 2;
+                $("#text-panel").hide( "fast", function() {
+                });
+            });
+            $(".sticker-collapse").click(function(){
+                hiddenPanel = 3;
+                $("#sticker-panel").hide( "fast", function() {
+                });
+            });
+
+            $("#sidebar-toggler").click(function(){
+                console.log(hiddenPanel);
+                if (hiddenPanel == 1) {
+                    $("#drawing-panel").show( "fast", function() {
+                        hiddenPanel = 0;
+                    });
+                }
+                if (hiddenPanel==2) {
+                    $("#text-panel").show( "fast", function() {
+                        hiddenPanel = 0;
+                    });
+                }
+                if (hiddenPanel==3) {
+                    $("#sticker-panel").show( "fast", function() {
+                        hiddenPanel = 0;
+                    });
+                }
+            });
+        </script>>
     </body>
 
 </html>
