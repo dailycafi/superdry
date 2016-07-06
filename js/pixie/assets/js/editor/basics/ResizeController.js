@@ -80,6 +80,8 @@ angular.module('image.basics')
     };
 
     function resize(widthScale, heightScale) {
+        console.log("resized");
+
         var newHeight = Math.round(canvas.original.height * heightScale),
             newWidth  = Math.round(canvas.original.width * widthScale);
 

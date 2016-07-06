@@ -15,7 +15,6 @@ angular.module('ImageEditor', ['ngMaterial', 'ngAnimate', 'ui.sortable', 'image.
 
     //check if we're on a demo site
     $rootScope.isDemo = document.URL.indexOf('pixie.vebto.com') > -1;
-
     $rootScope.isIntegrationMode = false;
 
     //check if we're running in integration mode

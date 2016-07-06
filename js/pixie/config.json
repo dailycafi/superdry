@@ -1,5 +1,9 @@
 {
 	"stickers": [
-		{"name":"logo","items":2,"type":"png"}
+		{"name":"superdry","items":3,"type":"png"},
+		{"name":"星云","items":6,"type":"png","darkbg":true},
+		{"name":"交通工具小贴图","items":22,"type":"svg"},
+		{"name":"地标小贴图","items":100,"type":"svg"},
+		{"name":"沙滩小贴图","items":22,"type":"svg"}
 	]
 }

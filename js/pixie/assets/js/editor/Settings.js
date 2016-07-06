@@ -12,7 +12,6 @@ angular.module('ImageEditor').factory('settings', ['$rootScope', '$http', functi
 
     $http.get('config.json').success(function(data) {
         settings.all = data;
-
         $rootScope.$emit('settings.ready');
     });
 

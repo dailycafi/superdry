@@ -1,10 +1,7 @@
+@import url(http://fonts.useso.com/earlyaccess/notosanssc.css);
+
 body{
 	background-color: black !important;
-}
-
-@font-face {
-    font-family: msyh;
-    src: url(../fonts/msyh.ttf);
 }
 
 .container img.splitting-top{
@@ -41,10 +38,6 @@ div.superdry-well{
 	z-index: 999;
 	padding-top: 60px;
 	padding-bottom: 60px;
-}
-
-div.superdry-well div.text-container h1{
-	font-family:msyh, sans-serif;
 }
 
 div.superdry-well div.text-container{
@@ -341,6 +334,12 @@ button.share-btn{
 		margin: auto;
 	}
 }
+
+div.superdry-well h1, h2, h3{
+	font-family: 'Noto Sans SC', sans-serif;
+	font-weight: bold;
+}
+
 @media(max-width: 768px){
 	.popup h3{
 		font-size: 16px;

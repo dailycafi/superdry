@@ -53,21 +53,36 @@
 
         <div ng-controller="MainController" ng-cloak style="height: 100%">
             <section id="right-panels">
-
                 <section id="objects" class="md-whiteframe-z1" ng-controller="ObjectsPanelController">
                     <h3 ed-toggle-panel-visibility="objects"><span>步骤</span><i class="mdi mdi-expand-less"></i></h3>
                     <div class="scrollbar-wrapper" ed-pretty-scrollbar ed-scroll-axis="y">
-
                         <ul class="objects-panel list-unstyled" ui-sortable="sortableOptions" ng-model="objects">
-                            <li class="object panel-item" ng-repeat="object in objects" ng-click="setAsActive(object)" ng-if="!object.ignore">
-                                <i class="mdi mdi-delete delete-object" ng-click="deleteObject(object); $event.stopPropagation();"></i>
-                                {{ spacify(object.name) || spacify(object.type) }}
+                            <li class="object panel-item" ng-repeat="object in objects" ng-click="setAsActive(object)" ng-if="!object.ignore" ng-switch="spacify(object.name)">
+                                <span ng-switch-when="Main Image">
+                                    <i class="mdi mdi-lock-outline lock-object" ng-class="{ 'not-locked': !object.locked }"></i>
+                                    Superdry底图
+                                </span>
+                                <span ng-switch-when="Free Drawing">
+                                    <i class="mdi mdi-delete delete-object" ng-click="deleteObject(object); $event.stopPropagation();"></i>
+                                    画线
+                                </span>
+                                <span ng-switch-when="Sticker">
+                                    <i class="mdi mdi-delete delete-object" ng-click="deleteObject(object); $event.stopPropagation();"></i>
+                                    贴纸
+                                </span>
+                                 <span ng-switch-when="Text">
+                                    <i class="mdi mdi-delete delete-object" ng-click="deleteObject(object); $event.stopPropagation();"></i>
+                                    插入文字
+                                </span>
+                                <span ng-switch-default>
+                                    <i class="mdi mdi-delete delete-object" ng-click="deleteObject(object); $event.stopPropagation();"></i>
+                                    {{spacify(object.name)}}
+                                </span>
                             </li>
                             <li ng-if="!canvas.fabric._objects.length" class="text-center"><h4>尚未有步骤</h4></li>
                         </ul>
                     </div>
                 </section>
-
             </section>
 
             <section ng-hide="!loading" id="spinner">
@@ -82,7 +97,6 @@
                     </md-button>
                 </div>
                 <div id="navigation-bar">
-
                     <div data-activates="text" class="nav-item">
                         <i class="mdi mdi-format-bold"></i>
                         <div class="title pull-up">文字</div>
@@ -94,7 +108,7 @@
 
                     <div data-activates="stickers" class="nav-item">
                         <i class="mdi mdi-favorite"></i>
-                        <div class="title pull-up">Superdry</div>
+                        <div class="title pull-up">贴图</div>
                     </div>
                     
                 </div>
@@ -107,7 +121,7 @@
                                 <md-select ng-model="filters.category" ng-change="fonts.paginator.filter(filters)" placeholder="Select a Type">
                                     <md-option value="serif">Serif</md-option>
                                     <md-option value="sans-serif">Sans Serif</md-option>
-                                    <md-option value="display">Display</md-option>
+                                    <md-option value="display">显示字体</md-option>
                                     <md-option value="handwriting">手写体</md-option>
                                     <md-option value="monospace">等宽字体</md-option>
                                 </md-select>
@@ -121,11 +135,11 @@
 
                         <div ng-hide="activeTab !== 'text'" class="pagination md-whiteframe-z1" ed-fonts-pagination></div>
 
-                        <section class="fonts-preview" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                        <section class="fonts-preview" id="text-fonts" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
                             <div class="font" ng-style="{ 'font-family':  font.family }" ng-repeat="font in fonts.paginator.currentItems" ng-click="changeFont(font.family, $event)">{{ font.family }}</div>
                         </section>
 
-                        <div data-name="text" class="actions-menu wider md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
+                        <div data-name="text" id="text-panel" class="float-panel actions-menu wider md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
                             <div class="menu-header"><h3>文字</h3></div>
 
                             <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
@@ -190,21 +204,30 @@
                                     <md-button ng-click="finishAddingTextToCanvas()" class="md-primary md-raised">保存</md-button>
                                     <md-button ng-click="cancelAddingTextToCanvas()" class="md-raised">取消</md-button>
                                 </div>
+
                             </section>
                         </div>
                     </section>
+
                     <section id="drawing" class="tab" data-index="2" ng-controller="DrawingController">
                         <h2 class="tab-title">选择笔刷</h2>
                         <div id="brushes">
-                            <div ng-repeat="brush in drawing.availableBrushes" ng-class="{ active: drawing.activeBrushName == brush }" class="brush" ng-click="changeBrush(brush, $event)">
-                                <img title="{{ brush }}" class="img-responsive" ng-src="assets/images/brushes/{{brush}}.png"/>
+                            <div ng-repeat="brush in drawing.availableBrushes" ng-class="{active: drawing.activeBrushName == brush }" class="brush" ng-click="changeBrush(brush, $event)">
+                                <img title="{{ brush }}" id="brush-img" class="img-responsive" ng-src="assets/images/brushes/{{brush}}.png"/>
                             </div>
                         </div>
 
-                        <div data-name="drawing" class="actions-menu wider md-whiteframe-z1" ng-class="activePanel == 'drawing' ? 'open' : 'closed'">
-                            <div class="menu-header"><h3>笔触</h3></div>
-
-                            <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                        <!--
+                         <section id="right-panels">
+                            <section id="objects" class="md-whiteframe-z1" ng-controller="ObjectsPanelController">
+                                <h3 ed-toggle-panel-visibility="objects"><span>步骤</span><i class="mdi mdi-expand-less"></i></h3>
+                            </section>
+                        </section>
+                        -->
+                        <div data-name="drawing" id="drawing-panel" class="float-panel actions-menu wider md-whiteframe-z1" ng-class="activePanel == 'drawing' ? 'open' : 'closed'">
+                            <div class="menu-header" id="drawing-panel-header"><h3><span>笔触</span></h3></div>
+                            <!--ed-toggle-panel-visibility="objects" this needs to be togglable-->
+                            <section class="actions-menu-inner" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
                                 <div class="md-slider">
                                     <div class="slider-label">笔触粗细</div>
                                     <md-slider aria-label="brush thickness" step="1" ng-model="drawing.params.brushWidth" ng-change="drawing.setProperty('width', drawing.params.brushWidth)" min="1" max="100"></md-slider>
@@ -212,7 +235,6 @@
                                 <div class="slider-input">
                                     <input type="number" ng-change="drawing.setProperty('width', drawing.params.brushWidth)" ng-model="drawing.params.brushWidth"/>
                                 </div>
-
 
                                 <div class="colorpicker">
                                     <div class="colorpicker-label"><span>颜色</span></div>
@@ -254,26 +276,26 @@
                                 </div>
 
                                 <div class="buttons">
-                                    <md-button ng-click="finishAddingDrawingsToCanvas()" class="md-primary md-raised">保存笔触</md-button>
-                                    <md-button ng-click="cancelAddingDrawingsToCanvas()" class="md-raised">清除笔触</md-button>
+                                    <md-button ng-click="finishAddingDrawingsToCanvas()" class="md-primary md-raised">完成绘制</md-button>
+                                    <md-button ng-click="cancelAddingDrawingsToCanvas()" class="md-raised">清除所画</md-button>
                                 </div>
                             </section>
                         </div>
                     </section>
 
                     <section id="stickers" class="tab" data-index="3" ng-controller="StickersController">
-                        <div data-name="stickers" class="actions-menu md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
-                            <div class="menu-header"><h3>Sticker</h3></div>
+                        <div data-name="stickers" id="sticker-panel" class="actions-menu md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
+                            <div class="menu-header"><h3>贴纸</h3></div>
                             <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
                                <div class="md-slider">
-                                   <div class="slider-label">Opacity</div>
+                                   <div class="slider-label">透明度</div>
                                    <md-slider aria-label="shape opacity" step="0.1" ng-model="opacity" ng-change="setOpacity(opacity)" min="0" max="1"></md-slider>
                                </div>
                                <div class="slider-input">
                                    <input type="number" ng-change="setOpacity(opacity)" step="0.1" min="0.1" max="1" ng-model="opacity"/>
                                </div>
                                <section class="colorpicker" ng-if="activeStickerIsSvg()">
-                                   <div class="colorpicker-label"><span>Color</span></div>
+                                   <div class="colorpicker-label"><span>颜色</span></div>
                                    <input start-color="#000" ng-model="color" ed-color-picker="setColor(color)"  type="text"/>
                                </section>
                            </section>
@@ -298,6 +320,7 @@
 
                 <section id="top-panel" class="md-whiteframe-z1" ng-controller="TopPanelController">
                     <md-button ng-click="openSaveDialog($event)" class="md-primary md-raised">保存</md-button>
+                    <span style="margin-right: 10px" id="toggle-float">显示/收起浮窗</span>
                 </section>
                 <canvas ng-show="started" id="canvas" class="md-whiteframe-z2"></canvas>
 
@@ -368,8 +391,8 @@
             </div>
 
             <script data-preload="true" data-path="." src="pixie-integrate.js"></script>
-
             <script src="assets/js/scripts.js?v20"></script>
+            <script src="assets/js/jquery.visible.min.js"></script>
 
             <script type="application/ng-template" id="gradient-sheet-template">
                 <md-bottom-sheet class="bottom-sheet gradients-sheet">
@@ -418,16 +441,6 @@
                         <label>手机号码</label>
                         <input type="text" ng-model="mobileNum">
                     </md-input-container>
-//                    <md-radio-group ng-model="imageType">
-                    //  <md-radio-button value="jpeg">JPEG</md-radio-button>
-//                        <md-radio-button value="png">PNG </md-radio-button>
-//                   </md-radio-group>
-
-//                    <div ng-if="imageType === 'jpeg'">
-//                    <div class="slider-label">Quality {{ imageQuality }}</div>
-//                     <md-slider aria-label="Angle" md-discrete ng-model="imageQuality" step="1" min="1" max="10" ></md-slider>
-//                  </div>
-
                     <md-button ng-click="saveImage($event)" class="md-raised md-primary">保存</md-button>
                 </md-dialog>
             </script>
@@ -502,7 +515,6 @@
                 window.QINIU_UPTOKEN = data.uptoken;
             });
         </script>
-
 
         <script type="text/javascript">
             function createPost(url, userName, mobile) {
@@ -579,6 +591,72 @@
                     // 参数错误
                 }
             }, false);
+        </script>
+
+        <script>
+        //drawing-float && text-float
+            var flag = 0;
+            $("#toggle-float").click(function() {
+                if ($("#drawing-panel").visible()) {
+                    flag = 0;
+                    $("#drawing-panel").hide( "fast", function() {
+                    // Animation complete.
+                        flag=1;
+                    });
+                }
+
+                if ($("#text-panel").visible()){
+                    flag = 0;
+                    $("#text-panel").hide( "fast", function() {
+                    // Animation complete.
+                        flag = 2;
+                    });
+                }
+
+                if ($("#sticker-panel").visible()){
+                    flag = 0;
+                    $("#sticker-panel").hide( "fast", function() {
+                    // Animation complete.
+                        flag = 3;
+                    });
+                }
+
+                if (flag == 1) {
+                    $("#drawing-panel").show( "fast", function() {
+                    // Animation complete.
+                        flag = 0;
+                    });
+                }
+                else if(flag == 2){
+                    $("#text-panel").show( "fast", function() {
+                    // Animation complete.
+                        flag = 0;
+                    });
+                }
+                else if(flag == 3){
+                    $("#sticker-panel").show( "fast", function() {
+                    // Animation complete.
+                        flag = 0;
+                    });
+                }
+                //sticker-panel
+            });
+        </script>
+
+        <script type="text/javascript">          
+            $("#brushes").click(function(){
+                console.log("brush clicked");
+                $("#drawing-panel").show( "fast", function() {
+
+                });
+            });
+            //text-fonts
+            $("#text-fonts").click(function(){
+                console.log("brush clicked");
+                $("#text-panel").show( "fast", function() {
+
+                });
+            });
         </script>
     </body>
 
