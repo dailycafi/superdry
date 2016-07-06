@@ -24390,7 +24390,7 @@ var fabric = fabric || {
             lockRotation: !1,
             lockScalingX: !1,
             lockScalingY: !1,
-            lockUniScaling: !1,
+            lockUniScaling: 1,
             lockScalingFlip: !1,
             stateProperties: "top left width height scaleX scaleY flipX flipY originX originY transformMatrix stroke strokeWidth strokeDashArray strokeLineCap strokeLineJoin strokeMiterLimit angle opacity fill fillRule globalCompositeOperation shadow clipTo visible backgroundColor".split(" "),
             initialize: function(t) {
@@ -28186,7 +28186,7 @@ var fabric = fabric || {
                 lockRotation: !0,
                 lockScalingX: !0,
                 lockScalingY: !0,
-                lockUniScaling: !0,
+                lockUniScaling: 1,
                 hasControls: !1,
                 hasBorders: !1
             },
@@ -28194,7 +28194,7 @@ var fabric = fabric || {
                 this.fabric.dispose(), this.mainImage = !1, this.fabric = !1, this.ctx = !1, this.container = !1, this.viewport = !1, this.offset = !1, this.element = !1, this.original = {}, this.currentZoom = 1, t.editorCustomActions = {}, $(window).off("resize"), n.destroy()
             },
             start: function(r) {
-                if (this.element = document.getElementById("canvas"), this.fabric = new fabric.Canvas("canvas"), this.ctx = this.fabric.getContext("2d"), this.container = $(".canvas-container"), this.viewport = document.getElementById("viewport"), t.editorCustomActions = {}, this.fabric.selection = !1, this.fabric.renderOnAddRemove = !1, fabric.Object.prototype.borderColor = "#2196F3", fabric.Object.prototype.lockUniScaling = 1, fabric.Object.prototype.cornerColor = "#2196F3", fabric.Object.prototype.transparentCorners = !1, r || (r = t.getParam("url")), r) this.loadMainImage(r), t.started = !0;
+                if (this.element = document.getElementById("canvas"), this.fabric = new fabric.Canvas("canvas"), this.ctx = this.fabric.getContext("2d"), this.container = $(".canvas-container"), this.viewport = document.getElementById("viewport"), t.editorCustomActions = {}, this.fabric.selection = !1, this.fabric.renderOnAddRemove = !1, fabric.Object.prototype.borderColor = "#2196F3", fabric.Object.prototype.cornerColor = "#2196F3", fabric.Object.prototype.transparentCorners = !1, r || (r = t.getParam("url")), r) this.loadMainImage(r), t.started = !0;
                 else if (t.getParam("blankCanvasSize")) {
                     var o = t.getParam("blankCanvasSize");
                     this.openNew(o.width, o.height, "newCanvas"), t.started = !0

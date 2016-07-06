@@ -320,7 +320,7 @@
 
                 <section id="top-panel" class="md-whiteframe-z1" ng-controller="TopPanelController">
                     <md-button ng-click="openSaveDialog($event)" class="md-primary md-raised">保存</md-button>
-                    <span style="margin-right: 10px" id="toggle-float">显示/收起浮窗</span>
+                    <!--<span style="margin-right: 10px" id="toggle-float">显示/收起浮窗</span>-->
                 </section>
                 <canvas ng-show="started" id="canvas" class="md-whiteframe-z2"></canvas>
 
@@ -596,7 +596,7 @@
         <script>
         //drawing-float && text-float
             var flag = 0;
-            $("#toggle-float").click(function() {
+            $("#sidebar-toggler").click(function() {
                 if ($("#drawing-panel").visible()) {
                     flag = 0;
                     $("#drawing-panel").hide( "fast", function() {
@@ -605,7 +605,7 @@
                     });
                 }
 
-                if ($("#text-panel").visible()){
+             if ($("#text-panel").visible()){
                     flag = 0;
                     $("#text-panel").hide( "fast", function() {
                     // Animation complete.
