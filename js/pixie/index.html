@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="../../bower_components/SpinKit/css/spinners/2-double-bounce.css">
 
         <link href='http://fonts.useso.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+
         <script type="text/javascript">
             function touchHandler(event) {
                 var touches = event.changedTouches,
@@ -26,7 +27,6 @@
                     case "touchend":   type = "mouseup";   break;
                     default:           return;
                 }
-
                 // initMouseEvent(type, canBubble, cancelable, view, clickCount, 
                 //                screenX, screenY, clientX, clientY, ctrlKey, 
                 //                altKey, shiftKey, metaKey, button, relatedTarget);
@@ -444,7 +444,7 @@
                         <label>手机号码</label>
                         <input type="text" ng-model="mobileNum">
                     </md-input-container>
-                    <md-button ng-click="saveImage($event)" id="save-image-btn" class="md-raised md-primary">保存</md-button>
+                    <md-button ng-touch="saveImage($event)" class="md-raised md-primary">保存</md-button>
                 </md-dialog>
             </script>
 

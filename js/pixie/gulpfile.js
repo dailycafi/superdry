@@ -62,6 +62,7 @@ gulp.task('scripts', function() {
         'assets/js/vendor/angular-aria.js',
         'assets/js/vendor/angular-material.js',
         'assets/js/vendor/angular-sortable.js',
+        'assets/js/vendor/angular-touch.js'
     	'assets/js/vendor/fabric.js',
     	'assets/js/editor/App.js',
         'assets/js/editor/LocalStorage.js',
