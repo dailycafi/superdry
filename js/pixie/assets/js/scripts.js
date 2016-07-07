@@ -28659,7 +28659,7 @@ var fabric = fabric || {
             return Math.round(100 * n.currentZoom)
         }
     }]), angular.module("ImageEditor").controller("TopPanelController", ["$rootScope", "$scope", "$mdDialog", "$mdToast", "$$rAF", "canvas", "history", "saver", function(t, e, n, i, r, o, a, s) {
-        e.history = a, e.isDemo = t.isDemo, e.canOpenImage = !1, e.canvas = o, e.openImageMode = "open", e.canvasWidth = 800, e.canvasHeight = 600, e.userName = "", e.imageType = "png", e.imageQuality = 8, e.objectsPanelOpen = !0, e.historyPanelOpen = !1, e.openUploadDialog = function(t) {
+        e.history = a, e.isDemo = t.isDemo, e.canOpenImage = !1, e.canvas = o, e.openImageMode = "open", e.canvasWidth = 800, e.canvasHeight = 600, e.userName = "", e.imageType = "png", e.imageQuality = 4, e.objectsPanelOpen = !0, e.historyPanelOpen = !1, e.openUploadDialog = function(t) {
             n.show({
                 template: $("#main-image-upload-dialog-template").html(),
                 targetEvent: t,
