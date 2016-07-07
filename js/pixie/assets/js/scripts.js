@@ -29077,7 +29077,7 @@ var fabric = fabric || {
                 "freeDrawing" === t.name && t.removeOnCancel && n.fabric.remove(t)
             }), i.disable(), n.fabric.renderAll(), e.activePanel = !1
         }, e.$on("tab.changed", function(e, n) {
-            "drawing" !== n && (i.disable(), t.cancelAddingDrawingsToCanvas())
+            "drawing" !== n && i.disable()
         }), n.fabric.on("path:created", function(t) {
             i.isEnabled && (t.path.setOptions(n.imageStatic), t.path.name = "freeDrawing", t.path.removeOnCancel = !0)
         })

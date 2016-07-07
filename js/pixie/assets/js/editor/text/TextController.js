@@ -22,7 +22,7 @@ angular.module('image.text')
 		$rootScope.openPanel('text', e);
 
 		if ( ! active || active.name !== 'text') {
-			var newText = new fabric.IText('Double click me to edit my contents.', {
+			var newText = new fabric.IText('双击编辑文字', {
 				fontWeight: 400,
 				fontSize: 28 / canvas.currentZoom,
 				fill: '#fff',
