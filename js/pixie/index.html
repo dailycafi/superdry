@@ -103,6 +103,10 @@
                     </md-button>
                 </div>
                 <div id="navigation-bar">
+                    <div data-activates="filters" class="nav-item">
+                        <i class="mdi mdi-brightness-6"></i>
+                        <div class="title">更改底色</div>
+                    </div>    
                     <div data-activates="text" class="nav-item">
                         <i class="mdi mdi-format-bold"></i>
                         <div class="title">文字</div>
@@ -115,14 +119,27 @@
                         <i class="mdi mdi-favorite"></i>
                         <div class="title pull-up">贴图</div>
                     </div>
-                    <div data-activates="filters" class="nav-item">
-                        <i class="mdi mdi-brightness-6"></i>
-                        <div class="title">更改底色</div>
-                    </div>    
                 </div>
 
                 <div id="tabs">
-                    <section id="text" data-index="1" class="tab" ng-controller="TextController">
+
+                    <section id="filters" class="tab" data-index="1" ng-controller="FiltersController">
+                        <h2 class="tab-title">挑选您的TSHIRT</h2>
+                        <div class="filters-list row" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                            <figure ng-class="{ applied: filters.filterAlreadyApplied(filter.name) }" ng-repeat="filter in filters.all" class="filter col-sm-6 tshirt-backboard">
+                                <div class="filter-image">
+                                    <img ng-src="assets/images/filters/{{ filter.name.toLowerCase() }}.png" class="img-responsive md-whiteframe-z1"/>
+                                    <div ng-class="{ 'remove-only': !filter.options }" class="remove-filter-overlay">
+                                        <i class="mdi mdi-cancel"></i>
+                                        <i class="mdi mdi-settings"></i>
+                                    </div>
+                                </div>
+                                <figcaption>{{ filter.displayName || filter.name }}</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <section id="text" data-index="2" class="tab" ng-controller="TextController">
                         <h2 class="tab-title">选择字体</h2>
                         <div class="filter-inputs">
                             <div class="filter-input">
@@ -218,7 +235,7 @@
                         </div>
                     </section>
 
-                    <section id="drawing" class="tab" data-index="2" ng-controller="DrawingController">
+                    <section id="drawing" class="tab" data-index="3" ng-controller="DrawingController">
                         <h2 class="tab-title">选择笔刷</h2>
                         <div id="brushes">
                             <div ng-repeat="brush in drawing.availableBrushes" ng-class="{active: drawing.activeBrushName == brush }" class="brush" ng-click="changeBrush(brush, $event)">
@@ -285,7 +302,7 @@
                         </div>
                     </section>
 
-                    <section id="stickers" class="tab" data-index="3" ng-controller="StickersController">
+                    <section id="stickers" class="tab" data-index="4" ng-controller="StickersController">
                         <div data-name="stickers" id="sticker-panel" class="actions-menu md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
                             <div class="menu-header"><h3><span>贴纸</span><span class="sticker-collapse" style="float:right">收起</span></h3></div>
 
@@ -314,23 +331,6 @@
                             </section>
                         </div>
                     </section>
-
-                    <section id="filters" class="tab" data-index="4" ng-controller="FiltersController">
-                        <h2 class="tab-title">挑选您的TSHIRT</h2>
-                        <div class="filters-list row" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
-                            <figure ng-class="{ applied: filters.filterAlreadyApplied(filter.name) }" ng-repeat="filter in filters.all" class="filter col-sm-6 tshirt-backboard">
-                                <div class="filter-image">
-                                    <img ng-src="assets/images/filters/{{ filter.name.toLowerCase() }}.png" class="img-responsive md-whiteframe-z1"/>
-                                    <div ng-class="{ 'remove-only': !filter.options }" class="remove-filter-overlay">
-                                        <i class="mdi mdi-cancel"></i>
-                                        <i class="mdi mdi-settings"></i>
-                                    </div>
-                                </div>
-                                <figcaption>{{ filter.displayName || filter.name }}</figcaption>
-                            </figure>
-                        </div>
-                    </section>
-
                 </div>
             </section>
 
@@ -566,7 +566,7 @@
                 //var match = location.search.match(/pic_id=(\d+)/)
                 //if (match) {
                     //var picId = +match[1];
-                    var imageURL = "assets/images/tshirts/0" + ".png"
+                    var imageURL = "http://7xvxjf.com2.z0.glb.qiniucdn.com/0.png"
                     sdpE.openSampleImage(imageURL);
                     //这里Loading
                     window.uploadImage = function(data, userName, mobileNum) {
@@ -717,7 +717,7 @@
 
             $(document).on('click', '.tshirt-backboard', function() {
                 var selected = $(this).index();
-                var imageURL = "assets/images/tshirts/" + selected + ".png";
+                var imageURL = "http://7xvxjf.com2.z0.glb.qiniucdn.com/" + selected + ".png";
                 sdpE.openSampleImage(imageURL);
             });
 
