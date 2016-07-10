@@ -105,19 +105,22 @@
                 <div id="navigation-bar">
                     <div data-activates="text" class="nav-item">
                         <i class="mdi mdi-format-bold"></i>
-                        <div class="title pull-up">文字</div>
+                        <div class="title">文字</div>
                     </div>
                     <div data-activates="drawing" class="nav-item">
                         <i class="mdi mdi-brush"></i>
                         <div class="title">画画</div>
                     </div>
-
                     <div data-activates="stickers" class="nav-item">
                         <i class="mdi mdi-favorite"></i>
                         <div class="title pull-up">贴图</div>
                     </div>
-                    
+                    <div data-activates="filters" class="nav-item">
+                        <i class="mdi mdi-brightness-6"></i>
+                        <div class="title">更改底色</div>
+                    </div>    
                 </div>
+
                 <div id="tabs">
                     <section id="text" data-index="1" class="tab" ng-controller="TextController">
                         <h2 class="tab-title">选择字体</h2>
@@ -312,18 +315,31 @@
                         </div>
                     </section>
 
-                </div>
+                    <section id="filters" class="tab" data-index="4" ng-controller="FiltersController">
+                        <h2 class="tab-title">挑选您的TSHIRT</h2>
+                        <div class="filters-list row" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                            <figure ng-class="{ applied: filters.filterAlreadyApplied(filter.name) }" ng-repeat="filter in filters.all" class="filter col-sm-6 tshirt-backboard">
+                                <div class="filter-image">
+                                    <img ng-src="assets/images/filters/{{ filter.name.toLowerCase() }}.png" class="img-responsive md-whiteframe-z1"/>
+                                    <div ng-class="{ 'remove-only': !filter.options }" class="remove-filter-overlay">
+                                        <i class="mdi mdi-cancel"></i>
+                                        <i class="mdi mdi-settings"></i>
+                                    </div>
+                                </div>
+                                <figcaption>{{ filter.displayName || filter.name }}</figcaption>
+                            </figure>
+                        </div>
+                    </section>
 
+                </div>
             </section>
 
             <section id="viewport">
-
                 <section id="top-panel" class="md-whiteframe-z1" ng-controller="TopPanelController">
                     <md-button ng-click="openSaveDialog($event)" class="md-primary md-raised">保存</md-button>
                     <!--<span style="margin-right: 20px; color: #666;" class="toggle-float">显示/收起浮窗</span>-->
                 </section>
                 <canvas ng-show="started" id="canvas" class="md-whiteframe-z2"></canvas>
-
             </section>
 
             <div id="bottom-bar" ng-controller="ZoomController">
@@ -547,11 +563,10 @@
                 });
             }
             document.addEventListener('DOMContentLoaded', function() {
-                var match = location.search.match(/pic_id=(\d+)/)
-                if (match) {
-                    var picId = +match[1];
-                    var imageURL = "assets/images/tshirts/tshirt-" + picId + ".png"
-
+                //var match = location.search.match(/pic_id=(\d+)/)
+                //if (match) {
+                    //var picId = +match[1];
+                    var imageURL = "assets/images/tshirts/0" + ".png"
                     sdpE.openSampleImage(imageURL);
                     //这里Loading
                     window.uploadImage = function(data, userName, mobileNum) {
@@ -588,10 +603,10 @@
                         xhr.send(pic);
                     };
                 
-                }
-                else {
+                //}
+                //else {
                     // 参数错误
-                }
+                //}
             }, false);
         </script>
 
@@ -648,7 +663,6 @@
         <script type="text/javascript">          
             $("#brushes").click(function(){
                 $("#drawing-panel").show( "fast", function() {
-
                 });
             });
             //text-fonts
@@ -663,6 +677,7 @@
                 });
             });
         </script>
+
         <script type="text/javascript">
             var hiddenPanel = 0;
             $(".drawing-hide").click(function(){
@@ -699,11 +714,15 @@
                     });
                 }
             });
+
+            $(document).on('click', '.tshirt-backboard', function() {
+                var selected = $(this).index();
+                var imageURL = "assets/images/tshirts/" + selected + ".png";
+                sdpE.openSampleImage(imageURL);
+            });
+
         </script>
 
-        <script>
-
-        </script>
 
     </body>
 

@@ -28692,7 +28692,8 @@ var fabric = fabric || {
                 controller: "TopPanelController",
                 clickOutsideToClose: !0
             })
-        }, e.createNewCanvas = function(n, i) {
+        }, 
+        e.createNewCanvas = function(n, i) {
             o.openNew(n, i), e.closeUploadDialog(), t.started = !0
         }, e.openSampleImage = function(url) {
             o.loadMainImage(url || "assets/images/lotus.jpg"), e.closeUploadDialog(), t.started = !0
@@ -29180,110 +29181,42 @@ var fabric = fabric || {
     }]), angular.module("image.filters").service("filters", ["$rootScope", "canvas", "history", function(t, e, n) {
         var i = {
             all: [{
-                name: "grayscale"
-            }, {
-                name: "invert"
-            }, {
-                name: "sepia"
-            }, {
-                name: "sepia2"
-            }, {
-                name: "removeWhite",
-                options: {
-                    distance: {
-                        current: 10
-                    },
-                    threshold: {
-                        current: 50
-                    }
-                }
-            }, {
-                name: "brightness",
-                options: {
-                    brightness: {
-                        current: 50
-                    }
-                }
-            }, {
-                name: "noise",
-                options: {
-                    noise: {
-                        current: 40,
-                        max: 600
-                    }
-                }
-            }, {
-                name: "GradientTransparency",
-                displayName: "Gradient",
-                options: {
-                    threshold: {
-                        current: 40
-                    }
-                }
-            }, {
-                name: "pixelate",
-                options: {
-                    blocksize: {
-                        max: 40,
-                        current: 2
-                    }
-                }
-            }, {
-                name: "sharpen",
-                uses: "Convolute",
-                matrix: [0, -1, 0, -1, 5, -1, 0, -1, 0]
-            }, {
-                name: "blur",
-                uses: "Convolute",
-                matrix: [1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9, 1 / 9]
-            }, {
-                name: "emboss",
-                uses: "Convolute",
-                matrix: [1, 1, 1, 1, .7, -1, -1, -1, -1]
-            }, {
-                name: "tint",
-                options: {
-                    opacity: {
-                        current: .5,
-                        min: .1,
-                        max: 1,
-                        step: .1
-                    },
-                    color: {
-                        colorpicker: !0,
-                        current: "#FF4081"
-                    }
-                }
-            }, {
-                name: "multiply",
-                options: {
-                    color: {
-                        colorpicker: !0,
-                        current: "#FF4081"
-                    }
-                }
-            }, {
-                name: "blend",
-                options: {
-                    mode: {
-                        current: "add",
-                        select: !0,
-                        available: ["add", "multiply", "subtract", "diff", "screen", "lighten", "darken"]
-                    },
-                    alpha: {
-                        current: .5,
-                        min: .1,
-                        max: 1,
-                        step: .1
-                    },
-                    color: {
-                        colorpicker: !0,
-                        current: "#FF4081"
-                    }
-                }
+                name: "纯洁白"
+            }, 
+            {
+                name: "柠檬黄"
+            }, 
+            {
+                name: "活力橙"
+            }, 
+            {
+                name: "淡雅蓝"
+            }, 
+            {
+                name: "青草绿"
+            }, 
+            {
+                name: "翡翠绿"
+            }, 
+            {
+                name: "尼斯蓝"
+            }, 
+            {
+                name: "晴空蓝"
+            },
+            {
+                name: "优雅紫"
+            }, 
+            {
+                name: "少女粉"
+            }, 
+            {
+                name: "动感粉"
             }],
             appliedFilters: [],
             applyFilter: function(r) {
+
+                /*
                 if (this.filterExists(r)) {
                     if (this.filterAlreadyApplied(r.name)) return this.removeFilter(r);
                     t.isLoading(), i.markAsApplied(r.name), setTimeout(function() {
@@ -29292,6 +29225,7 @@ var fabric = fabric || {
                         }), n.add("filter: " + (r.displayName || r.name), "brightness-6"), i.lastAppliedFilter = r, t.isNotLoading()
                     }, 30)
                 }
+                */
             },
             removeFilter: function(n) {
                 this.filterExists(n) && (t.isLoading(), i.unmarkAsApplied(n.name), setTimeout(function() {
