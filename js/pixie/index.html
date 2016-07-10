@@ -128,13 +128,12 @@
                         <div class="filters-list row" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
                             <figure ng-class="{ applied: filters.filterAlreadyApplied(filter.name) }" ng-repeat="filter in filters.all" class="filter col-sm-6 tshirt-backboard">
                                 <div class="filter-image">
-                                    <img ng-src="assets/images/filters/{{ filter.name.toLowerCase() }}.png" class="img-responsive md-whiteframe-z1"/>
+                                    <img ng-src="http://7xvxjf.com2.z0.glb.qiniucdn.com/tshirt-{{$index}}.png" class="img-responsive md-whiteframe-z1"/>
                                     <div ng-class="{ 'remove-only': !filter.options }" class="remove-filter-overlay">
                                         <i class="mdi mdi-cancel"></i>
                                         <i class="mdi mdi-settings"></i>
                                     </div>
                                 </div>
-                                <figcaption>{{ filter.displayName || filter.name }}</figcaption>
                             </figure>
                         </div>
                     </section>
