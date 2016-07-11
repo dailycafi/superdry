@@ -120,13 +120,14 @@
                         //Generate div and append to <div class="container shirt-list">
                         var tshirt = results[i];
                         var id = tshirt.id;
-                        var imageURL = tshirt.image + "?imageMogr2/thumbnail/!20p";
+                        var thumbImageURL = tshirt.image + "?imageMogr2/thumbnail/!40p";
+                        var imageURL = tshirt.image;
                         var likes = tshirt.likes;
                         var name = tshirt.name;
 
                         $(".shirt-list").append("\
                             <div class='one-shirt col-md-3 col-xs-6'>\
-                                <div class=\"img\" style='background-image: url(" + imageURL + ")'></div>\
+                                <div class=\"img\" style='background-image: url(" + thumbImageURL + ")'></div>\
                                 <div class='tshirt-title' style='margin-top:10px'>\
                                     <span>" + name + "</span>\
                                 </div>\
