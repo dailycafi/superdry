@@ -15,8 +15,11 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/lightbox.css">
+        <link rel="stylesheet" type="text/css" href="js/pixie/dist/sweetalert.css">
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="js/pixie/dist/sweetalert.min.js"></script>
+
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -117,7 +120,7 @@
                         //Generate div and append to <div class="container shirt-list">
                         var tshirt = results[i];
                         var id = tshirt.id;
-                        var imageURL = tshirt.image;
+                        var imageURL = tshirt.image + "?imageMogr2/thumbnail/!20p";
                         var likes = tshirt.likes;
                         var name = tshirt.name;
 
@@ -148,7 +151,11 @@
                 var jqxhr = $.post( liketshirtAPI, function() {
                 })
                 .done(function() {
-                    alert("投票成功");
+                    swal({title:"投票成功！", text:"谢谢您的参与", type: "success"},
+                        function(){
+                            console.log("post successsfully");
+                        }
+                    );
                 });
             });
         </script>

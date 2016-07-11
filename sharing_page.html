@@ -14,8 +14,10 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="js/pixie/dist/sweetalert.css">
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="js/pixie/dist/sweetalert.min.js"></script>
         <title>点击看我手绘的#SuperZHUAI#T恤</title>
     </head>
     <body>
@@ -164,8 +166,11 @@
                     console.log("post successsfully");
                 })
                 .done(function() {
-                    alert("投票成功");
-                    console.log("post successsfully");
+                    swal({title:"投票成功！", text:"谢谢您的参与", type: "success"},
+                        function(){
+                            console.log("post successsfully");
+                        }
+                    );
                 });
             });
         </script>
