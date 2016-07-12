@@ -1,9 +1,7 @@
 {
 	"stickers": [
 		{"name":"superdry","items":3,"type":"png"},
-		{"name":"星云","items":6,"type":"png","darkbg":true},
-		{"name":"交通工具小贴图","items":22,"type":"svg"},
-		{"name":"地标小贴图","items":100,"type":"svg"},
-		{"name":"沙滩小贴图","items":22,"type":"svg"}
+		{"name":"英伦风","items":8,"type":"png"},
+		{"name":"涂鸦","items":40,"type":"png"}
 	]
 }

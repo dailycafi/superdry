@@ -29307,7 +29307,7 @@ var fabric = fabric || {
                 }), r.add("Added: Sticker", "favorite")
             }) : fabric.util.loadImage("assets/images/stickers/" + e.name + "/" + i + "." + e.type, function(e) {
                 var i = new fabric.Image(e);
-                i.name = "sticker", n.fabric.add(i), i.center(), i.setCoords(), i.scaleToHeight(.1 * n.original.height), n.fabric.setActiveObject(i), n.fabric.renderAll(), t.$apply(function() {
+                i.name = "sticker", n.fabric.add(i), i.set('left', 100), i.set('top', 50), i.setCoords(), i.scaleToHeight(.2 * n.original.height), n.fabric.setActiveObject(i), n.fabric.renderAll(), t.$apply(function() {
                     t.loading = !1
                 }), r.add("Added: Sticker", "favorite")
             }))
