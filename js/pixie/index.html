@@ -528,7 +528,7 @@
         </script>
 
         <script>
-            $.getJSON('http://api.heidianer.com/api/clients/qiniu-uptoken/', function(data) {
+            $.getJSON('http://api.heidianer.com/api/clients/qiniu-uptoken/heidian/', function(data) {
                 console.log(data)
                 window.QINIU_UPTOKEN = data.uptoken;
             });
@@ -561,11 +561,12 @@
                     sweetAlert("发生错误", "请稍后再试试看, 错误信息" + response.stringfy(), "error");
                 });
             }
+
             document.addEventListener('DOMContentLoaded', function() {
                 //var match = location.search.match(/pic_id=(\d+)/)
                 //if (match) {
                     //var picId = +match[1];
-                    var imageURL = "http://7xvxjf.com2.z0.glb.qiniucdn.com/0.png"
+                    var imageURL = "./assets/images/tshirts/0.png";
                     sdpE.openSampleImage(imageURL);
                     //这里Loading
                     window.uploadImage = function(data, userName, mobileNum) {
@@ -601,11 +602,6 @@
                         xhr.setRequestHeader("Authorization", "UpToken " + QINIU_UPTOKEN);
                         xhr.send(pic);
                     };
-                
-                //}
-                //else {
-                    // 参数错误
-                //}
             }, false);
         </script>
 
@@ -716,7 +712,8 @@
 
             $(document).on('click', '.tshirt-backboard', function() {
                 var selected = $(this).index();
-                var imageURL = "http://7xvxjf.com2.z0.glb.qiniucdn.com/" + selected + ".png";
+                //var imageURL = "http://7xvxjf.com2.z0.glb.qiniucdn.com/" + selected + ".png";
+                var imageURL = "./assets/images/tshirts/" + selected + ".png";
                 sdpE.openSampleImage(imageURL);
             });
 
