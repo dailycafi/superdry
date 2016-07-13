@@ -1,7 +1,10 @@
 {
 	"stickers": [
 		{"name":"superdry","items":3,"type":"png"},
-		{"name":"英伦风","items":8,"type":"png"},
-		{"name":"涂鸦","items":40,"type":"png"}
+		{"name":"英伦风","items":19,"type":"png"},
+		{"name":"涂鸦","items":40,"type":"png"},
+		{"name":"街头滑板","items":9,"type":"png"},
+		{"name":"白色喷绘","items":9,"type":"png"},
+		{"name":"运动","items":9,"type":"png"},
 	]
 }
