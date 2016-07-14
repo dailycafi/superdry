@@ -28698,6 +28698,7 @@ var fabric = fabric || {
         }, e.openSampleImage = function(url) {
             o.loadMainImage(url || "assets/images/lotus.jpg"), e.closeUploadDialog(), t.started = !0
         }, e.saveImage = function(t) {
+            console.log("save");
             s.saveImage(e.imageType, e.imageQuality, e.userName, e.mobileNum, t)
         }, e.showImagePreview = function(t) {
             fabric.util.loadImage(t, function(t) {
@@ -29130,8 +29131,10 @@ var fabric = fabric || {
     }]), angular.module("ImageEditor").factory("saver", ["$rootScope", "$mdDialog", "$http", "$timeout", "canvas", function(t, e, n, i, r) {
         var o = {
             saveImage: function(e, n, i, m, o) {
+                console.log("save");
                 window.uploadImage(this.getDataUrl("png", "1"), i, m);
-                // return r.fabric.deactivateAll(), t.isDemo ? this.handleDemoSiteSave(o) : t.isIntegrationMode ? this.handleIntegrationModeSave(e, n, i) : void this.saveToComputer(e, n, i)
+                return r.fabric.deactivateAll();
+                //, t.isDemo ? this.handleDemoSiteSave(o) : t.isIntegrationMode ? this.handleIntegrationModeSave(e, n, i) : void this.saveToComputer(e, n, i)
             },
             handleIntegrationModeSave: function(n, i, o) {
                 r.zoom(1);
